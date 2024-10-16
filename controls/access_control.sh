@@ -6,7 +6,7 @@ source ../functions/access_control_functions/sudo_password_escalation_audit.sh
 source ../functions/access_control_functions/password_lockout_root_audit.sh
 source ../functions/access_control_functions/nologin_shells_check_audit.sh
 source ../functions/access_control_functions/pass_min_days_audit.sh
-source ../functions/access_control_functions/audit_auditd_packages_check.sh
+
 
 
 # Audit Control 5.1.10 Ensure sshd DisableForwarding is enabled'
@@ -30,8 +30,6 @@ f_check_pass_min_day
 echo -e "\n -- Starting Audit: Ensure nologin is not listed in /etc/shells --"
 f_check_nologin_in_shells
 
-# Audit Control 6.3.1.1 'Ensure auditd packages are installed'
-echo -e "\n -- Starting Audit: Ensure auditd packages are installed --"
-f_check_auditd_packages_installed
+
 
 echo -e "\n -- Audit Completed --"
