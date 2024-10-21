@@ -7,7 +7,8 @@ source ../functions/logging_auditing_functions/audit_bachlog_limit.sh
 source ../functions/access_control_functions/audit_auditd_packages_check.sh
 source ../functions/access_control_functions/max_log_file_action.sh
 source ../functions/access_control_functions/disk_full_action_audit.sh
-
+source ../functions/access_control_functions/auditd_logs_space_audit.sh
+source ../functions/access_control_functions/sudoers_audit.sh
 
 # Audit Control 6.3.1.1 'Ensure auditd packages are installed'
 echo -e "\n -- Starting Audit: Ensure auditd packages are installed --"
@@ -36,6 +37,14 @@ f_check_audit_log_retention
 # Audit Control 6.3.2.3 'Ensure system is disabled when audit logs are full'
 echo -e "\n -- Starting Audit: Ensure system is disabled when audit logs are full --"
 f_check_audit_log_safety_actions
+
+# Audit Control 6.3.2.4 'Ensure system warns when audit logs are low on space'
+echo -e "\n -- Starting Audit: Ensure system warns when audit logs are low on space --"
+f_check_audit_log_space_warnings
+
+# Audit Control 6.3.3.1 'Ensure changes to system administration scope (sudoers) is collected'
+echo -e "\n -- Starting Audit: Ensure changes to system administration scope (sudoers) is collected --"
+f_check_sudoers_audit
 
 
 echo -e "\n -- Audit Completed --"
