@@ -3,12 +3,15 @@
 # Source the functions file
 source ../functions/logging_auditing_functions/audit_auditd_packages_check.sh
 source ../functions/logging_auditing_functions/enabled_prior_to_auditd_check.sh
-source ../functions/logging_auditing_functions/audit_bachlog_limit.sh
-source ../functions/access_control_functions/audit_auditd_packages_check.sh
-source ../functions/access_control_functions/max_log_file_action.sh
-source ../functions/access_control_functions/disk_full_action_audit.sh
-source ../functions/access_control_functions/auditd_logs_space_audit.sh
-source ../functions/access_control_functions/sudoers_audit.sh
+source ../functions/logging_auditing_functions/audit_backlog_limit.sh
+source ../functions/logging_auditing_functions/audit_log_storage.sh
+source ../functions/logging_auditing_functions/auditd_service_status.sh
+source ../functions/logging_auditing_functions/max_log_file_action.sh
+source ../functions/logging_auditing_functions/disk_full_action_audit.sh
+source ../functions/logging_auditing_functions/auditd_logs_space_audit.sh
+source ../functions/logging_auditing_functions/sudoers_audit.sh
+source ../functions/logging_auditing_functions/sudo_log_file_audit.sh
+source ../functions/logging_auditing_functions/user_emulation_logging.sh
 
 # Audit Control 6.3.1.1 'Ensure auditd packages are installed'
 echo -e "\n -- Starting Audit: Ensure auditd packages are installed --"
@@ -46,5 +49,12 @@ f_check_audit_log_space_warnings
 echo -e "\n -- Starting Audit: Ensure changes to system administration scope (sudoers) is collected --"
 f_check_sudoers_audit
 
+# Audit Control 6.3.3.2 'Ensure actions as another user are always logged'
+echo -e "\n -- Starting Audit: Ensure actions as another user are always logged --"
+f_check_audit_user_emulation_logging
+
+# Audit Control 6.3.3.3 'Ensure events that modify the sudo log file are collected'
+echo -e "\n -- Starting Audit: Ensure events that modify the sudo log file are collected --"
+f_check_sudo_log_file_audit
 
 echo -e "\n -- Audit Completed --"
